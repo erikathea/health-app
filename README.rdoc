@@ -2,14 +2,14 @@
 
 Set up & run via Vagrant:
 
-* Prereq: `virtual box` `vagrant`
+* Prereq: <tt>virtual box</tt> & <tt>vagrant</tt>
 
-* Run `vagrant up`
+* Run <tt>vagrant up</tt>
 
-* Access dev env via `vagrant ssh`
+* Access dev env via <tt>vagrant ssh</tt>
 
-* Run the script `./vagrant/setup.sh`
+* Run the script <tt>./vagrant/setup.sh</tt>
 
-* Open app in `http://127.0.0.1:3000/`
+* Open app in <tt>http://127.0.0.1:3000/</tt>
 
 
