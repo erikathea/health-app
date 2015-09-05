@@ -1,0 +1,15 @@
+== Health App Demo
+
+Set up & run via Vagrant:
+
+* Prereq: `virtual box` `vagrant`
+
+* Run `vagrant up`
+
+* Access dev env via `vagrant ssh`
+
+* Run the script `./vagrant/setup.sh`
+
+* Open app in `http://127.0.0.1:3000/`
+
+
