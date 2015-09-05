@@ -14,4 +14,7 @@ sudo update-rc.d unicorn defaults
 sudo service unicorn start
 sudo service nginx restart
 
+rake db:create
+rake db:migrate
+rake setup:bootstrap
 

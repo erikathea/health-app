@@ -47,4 +47,5 @@ end
 
 gem 'unicorn'
 gem 'rack-timeout'
-
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
