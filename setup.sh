@@ -6,6 +6,10 @@ rbenv rehash
 bundle install
 rbenv rehash
 
+mkdir /vagrant/shared
+mkdir /vagrant/shared/log
+mkdir /vagrant/shared/pids
+
 sudo cp set/default /etc/nginx/sites-enabled/default
 sudo cp setup/unicorn /etc/init.d/unicorn
 sudo chmod 755 /etc/init.d/unicorn
