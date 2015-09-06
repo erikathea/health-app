@@ -1,10 +1,20 @@
 require 'spec_helper'
 
-describe 'Patient API' do
-  it 'shows a patient card' do
-    patient = create(:patient)
-    get "api/patients/#{patient.ssn}"
-    expect(response).to be_success
-    expect(json['ssn']).to eq(patient.ssn)
+describe API::PatientsController, type: :controller do
+
+  describe 'GET #show' do
+    before(:each) do
+      @patient = create(:patient)
+      get :show, id: @patient.ssn, format: :json
+    end
+
+    it 'return success response' do
+      expect(response).to be_success
+    end
+
+    it 'shows a patient card' do
+      json = JSON.parse(response.body, symbolize_name: true)
+      expect(json['ssn']).to eq(@patient.ssn)
+    end
   end
 end

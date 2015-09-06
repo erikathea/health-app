@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'factory_girl_rails'
+require 'rails_helper'
 # require 'database_cleaner'
 
 RSpec.configure do |config|
@@ -25,9 +26,8 @@ RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
   config.include FactoryGirl::Syntax::Methods
-  config.before(:each) do
+  config.before(:suite) do
     FactoryGirl.reload
-    FactoryGirl.find_definitions
   end
 
   #=begin
