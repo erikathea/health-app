@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :patients
+  constraints subdomain: 'api' do
+    namespace :api, path: '/' do
+      get '/token' => 'auth#token'
+      resources :patients, only: [:create, :show]
+    end
+  end
+
+  resources :patients, only: [:index, :show, :new]
   root 'patients#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

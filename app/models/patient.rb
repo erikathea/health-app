@@ -5,4 +5,8 @@ class Patient < ActiveRecord::Base
   has_many :physicians, through: :lab_records
   validates :ssn, uniqueness: true, presence: true, length: {is:9}
   validates :full_name, presence: true
+
+  def name
+    full_name
+  end
 end

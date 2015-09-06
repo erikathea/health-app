@@ -4,7 +4,7 @@ class PatientsController < ApplicationController
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
+    @patients = Patient.order(registration_date: :desc)
   end
 
   # GET /patients/1
@@ -15,10 +15,6 @@ class PatientsController < ApplicationController
   # GET /patients/new
   def new
     @patient = Patient.new
-  end
-
-  # GET /patients/1/edit
-  def edit
   end
 
   # POST /patients
@@ -34,30 +30,6 @@ class PatientsController < ApplicationController
         format.html { render :new }
         format.json { render json: @patient.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /patients/1
-  # PATCH/PUT /patients/1.json
-  def update
-    respond_to do |format|
-      if @patient.update(patient_params)
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
-        format.json { render :show, status: :ok, location: @patient }
-      else
-        format.html { render :edit }
-        format.json { render json: @patient.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /patients/1
-  # DELETE /patients/1.json
-  def destroy
-    @patient.destroy
-    respond_to do |format|
-      format.html { redirect_to patients_url, notice: 'Patient was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
