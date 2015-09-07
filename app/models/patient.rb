@@ -9,4 +9,9 @@ class Patient < ActiveRecord::Base
   def name
     full_name
   end
+
+  def convert_patient_records(data)
+    LabRecord.convert_records(self, data)
+    return self
+  end
 end

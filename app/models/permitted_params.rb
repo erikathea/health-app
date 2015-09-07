@@ -27,10 +27,10 @@ class PermittedParams < Struct.new(:params)
 
   def contact_detail_attributes
     [
-      :address
-      :email
-      :landline
-      :mobile
+      :address,
+      :email,
+      :landline,
+      :mobile,
       :fax
     ]
   end
