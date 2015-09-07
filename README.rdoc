@@ -10,6 +10,8 @@ Set up & run via Vagrant:
 
 * Run the script <tt>./vagrant/setup.sh</tt>
 
+* Add `127.0.0.1 api.health-app.dev` to `/etc/hosts`
+
 * Open app in <tt>http://127.0.0.1:3000/</tt>
 
 
