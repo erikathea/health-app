@@ -14,6 +14,7 @@ sudo cp set/default /etc/nginx/sites-enabled/default
 sudo cp setup/unicorn /etc/init.d/unicorn
 sudo chmod 755 /etc/init.d/unicorn
 sudo update-rc.d unicorn defaults
+sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
 
 sudo service unicorn start
 sudo service nginx restart
