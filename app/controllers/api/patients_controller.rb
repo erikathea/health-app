@@ -8,7 +8,7 @@ module API
       if @patient.present?
         render json: @patient, status: 200
       else
-        render nothing: true, status: 404
+        render nothing: true, status: 204
       end
     end
 
