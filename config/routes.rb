@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   constraints subdomain: 'api' do
     namespace :api, path: '/' do
       get '/token' => 'auth#token'
+      post '/save' => 'patients#save'
       resources :patients, only: [:create, :show]
     end
   end

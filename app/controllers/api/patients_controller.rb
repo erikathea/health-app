@@ -26,6 +26,11 @@ module API
       end
     end
 
+    # POST /patients
+    # POST /patients.json
+    def save
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_patient
@@ -34,7 +39,7 @@ module API
 
       # Never trust parameters from the scary internet, only allow the white list through.
       def patient_params
-        params[:patient]
+        permitted_params.patient_params
       end
   end
 end
