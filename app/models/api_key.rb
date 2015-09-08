@@ -1,6 +1,10 @@
 class APIKey < ActiveRecord::Base
   before_create :generate_access_token
 
+  def as_json(params={})
+    super(except: [:created_at, :updated_at])
+  end
+
   private
   def generate_access_token
     begin

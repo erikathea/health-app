@@ -14,4 +14,20 @@ class Patient < ActiveRecord::Base
     LabRecord.convert_records(self, data)
     return self
   end
+
+  def as_json(params={})
+    super(
+      only: [:ssn, :gender, :birth_date, :registration_date, :name],
+      include: [
+        {full_name: { except: [:created_at, :updated_at, :id] }},
+        { lab_records: {
+            only: [:name, :date_conducted],
+            include: [
+              { lab_details: { only: [:name, :value, :normal_range, :unit] } },
+              { health_facility: { only: [:name] }}
+            ]
+          }
+        }
+    ])
+  end
 end
