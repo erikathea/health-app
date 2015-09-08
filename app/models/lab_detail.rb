@@ -9,9 +9,9 @@ class LabDetail < ActiveRecord::Base
       lab_rec = LabDetail.create(
         lab_record: lab_record,
         name: key,
-        value: data["value"],
-        unit: data["unit"],
-        normal_range: data["normal_range"]
+        value: data[key]["value"],
+        unit: data[key]["unit"],
+        normal_range: data[key]["normal_range"]
       )
     end
   end
