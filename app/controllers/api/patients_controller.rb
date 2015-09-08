@@ -1,6 +1,6 @@
 module API
   class PatientsController < ApplicationController
-
+    before_action :authenticate, only: [:save]
     # GET /patients/1
     # GET /patients/1.json
     def show
@@ -9,20 +9,6 @@ module API
         render json: @patient, status: 200
       else
         render nothing: true, status: 204
-      end
-    end
-
-    # POST /patients
-    # POST /patients.json
-    def create
-      @patient = Patient.new(patient_params)
-
-      respond_to do |format|
-        if @patient.save
-          format.json { render :show, status: :created, location: @patient }
-        else
-          format.json { render json: @patient.errors, status: :unprocessable_entity }
-        end
       end
     end
 
@@ -39,15 +25,22 @@ module API
       end
     end
 
-    private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_patient
-        @patient = Patient.find_by(ssn: params[:ssn])
+    protected
+      def authenticate
+        authenticate_token || render_unauthorized
       end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def patient_params
-        permitted_params.patient_params
+      def authenticate_token
+        authenticate_or_request_with_http_token do |token, options|
+          key = APIKey.find_by(access_token: token)
+          return false unless key
+          Time.now <= (key.created_at + 5.seconds)
+        end
+      end
+
+      def render_unauthorized
+        self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+        render json: 'Bad credentials', status: 401
       end
   end
 end

@@ -36,7 +36,7 @@ describe API::PatientsController, type: :controller do
   end
 
   describe 'POST #save' do
-    context 'when adding data to valid patient' do
+    context 'when adding valid data to patient' do
       before(:each) do
         @patient = create(:patient)
         @lab_record_1 = create(:lab_record, patient: @patient)
