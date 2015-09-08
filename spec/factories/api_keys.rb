@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :api_key do
-    access_token "MyString"
+    sequence(:access_token) { |i| SecureRandom.hex }
   end
-
 end
