@@ -16,6 +16,7 @@ class Patient < ActiveRecord::Base
   end
 
   def as_json(params={})
+    #TODO: Improve this by using Jbuilder or ActiveModel Serializer
     super(
       only: [:ssn, :gender, :birth_date, :registration_date, :name],
       include: [
