@@ -1,6 +1,6 @@
 == Health App Demo
 
-Set up & run via Vagrant:
+====Setup:
 
 * Prereq: <tt>virtual box</tt> & <tt>vagrant</tt>
 
@@ -10,8 +10,30 @@ Set up & run via Vagrant:
 
 * Run the script <tt>./vagrant/setup.sh</tt>
 
-* Add `127.0.0.1 api.health-app.dev` to `/etc/hosts`
+* Add <tt>127.0.0.1 api.health-app.dev</tt> to <tt>/etc/hosts</tt>
 
 * Open app in <tt>http://127.0.0.1:3000/</tt>
 
+====Notes:
+API Calls via <tt>api.health-app.dev:3000</tt>
+* <tt>\token</tt>
+* <tt>\save</tt>
+* <tt>\patient\:ssn</tt>
 
+Rake tasks
+* <tt>rake setup:bootstrap </tt>
+* <tt>rake demo:load_data </tt>
+
+Unicorn
+* <tt>sudo service unicorn start</tt>
+* <tt>sudo service unicorn stop</tt>
+
+Nginx
+* <tt>sudo service nginx start</tt>
+* <tt>sudo service nginx stop</tt>
+* <tt>sudo service nginx restart</tt>
+
+====TODO:
+
+* Use ActiveModelSerializer instead of JBuilder
+* Add AngularJS related tests
