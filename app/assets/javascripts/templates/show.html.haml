@@ -1,0 +1,53 @@
+.row{"ng-controller" => "PatientShowController"}
+  .col-md-3
+    .row.panel.panel-info
+      .panel-heading
+        %h4 {{ patient.ssn }}
+        %h4 {{ patient.full_name.first_name }} {{ patient.full_name.middle_name }} {{ patient.full_name.last_name }}
+
+      .panel-body
+        %strong Sex:
+        %span{"ng-if" => "patient.gender==true"}
+          Female
+        %span{"ng-if" => "patient.gender==false"}
+          Male
+        %br
+        %strong Birth Date:
+        {{ patient.birth_date | date: 'MMM dd, yyyy'}}
+        %br
+        %strong Registered:
+        {{ patient.registration_date | date: 'MMM dd, yyyy'}}
+        %br
+        %button.btn.btn-default{"ng-click" => "back()"}
+          Back
+  .col-md-9
+    %h2 Records
+    .card.card-block.panel.panel-default.container-fluid{"ng-repeat" => "record in patient.lab_records track by $index"}
+      .card-title
+        %h3 {{ record.name }}
+      .card-text
+        .col-xs-4.col-md-4 {{ record.physician.full_name.first_name }} {{ record.physician.full_name.middle_name }} {{ record.physician.full_name.last_name }}
+        .col-xs-4.col-md-4 {{ record.health_facility.name }}
+        .col-xs-4.col-md-4
+          .pull-right {{ record.date_conducted | date: 'MMM dd, yyyy' }}
+      .card-block
+        .small.label.label-info{"style" => "padding-top: 0.6em"}
+          Show Details
+          %input{"aria-label" => "Toggle ngShow", "ng-model" => "checked", :type => "checkbox"}
+        .panel.check-element.animate-hide{"ng-show" => "checked"}
+          %table.table.table-striped
+            %thead
+              %tr.info
+                %th Name
+                %th Value
+                %th Unit
+                %th Normal Range
+            %tbody
+              %tr{"ng-repeat" => "detail in record.lab_details"}
+                %td {{ detail.name }}
+                %td {{ detail.value }}
+                %td
+                  {{ detail.unit }}
+                %td
+                  {{ detail.normal_range }}
+

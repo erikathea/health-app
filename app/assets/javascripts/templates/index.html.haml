@@ -1,0 +1,16 @@
+%h2 Patients
+%table.table.table-responsive.datatable{"ng-controller" => "PatientIndexController"}
+  %thead
+    %tr
+      %th SSN
+      %th Name
+      %th Date Registered
+  %tbody
+    %tr{"ng-repeat" => "patient in patients"}
+      %td
+        %a{"ng-href" => "{{ patient.url }}"}
+          {{ patient.ssn }}
+      %td
+        {{ patient.name }}
+      %td
+        {{ patient.registration_date | date: 'yyyy-MM-dd'}}

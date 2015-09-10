@@ -1,6 +1,27 @@
-%p#notice= notice
+%p.row#notice= notice
 
-%h1= @patient.ssn
-=@patient.name
-
-=link_to 'Back', patients_path
+.row
+  .col-md-3.row
+    .col-xs-4.col-md-12
+      %strong SSN:
+      = @patient.ssn
+    .col-xs-4.col-md-12
+      %strong Name:
+      = @patient.name
+    .col-xs-4.col-md-12
+      %strong Registered:
+      - if @patient.registration_date
+        = @patient.registration_date.to_s(:formatted_datetime)
+    .col-xs-4.col-md-12
+      %strong Sex:
+      = @patient.gender
+    .col-xs-4.col-md-12
+      %strong Birth Date:
+      - if @patient.birth_date
+        = @patient.birth_date.to_s(:formatted_datetime)
+    .col-xs-4.col-md-12=link_to 'Back', patients_path
+    .col-xs-12
+      %hr
+  .col-md-9
+    %h2 Records
+    = render 'lab_records', lab_records: @patient.lab_records

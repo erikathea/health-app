@@ -1,0 +1,25 @@
+.lab-records
+  - lab_records.each do |record|
+    .card.card-block
+      .card-title
+        %h3= record.name
+      .card-text
+        .col-xs-4.col-md-4= record.physician.full_name
+        .col-xs-4.col-md-4= record.health_facility.name
+        .col-xs-4.col-md-4
+          .pull-right= record.date_conducted.to_s(:date_conducted)
+      .card-block
+        %table.table
+          %thead
+            %tr
+              %th Name
+              %th Value
+              %th Unit
+              %th Normal Range
+          %tbody
+            - record.lab_details.each do |detail|
+              %tr
+                %td= detail.name
+                %td= detail.value
+                %td= detail.unit
+                %td= detail.normal_range
