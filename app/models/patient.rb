@@ -1,7 +1,7 @@
 class Patient < ActiveRecord::Base
   belongs_to :full_name
   belongs_to :contact_detail
-  has_many :lab_records
+  has_many :lab_records, -> { order 'lab_records.date_conducted DESC' }
   has_many :physicians, through: :lab_records
   validates :ssn, uniqueness: true, presence: true, length: {is:9}
   validates :full_name, presence: true
@@ -25,7 +25,8 @@ class Patient < ActiveRecord::Base
             only: [:name, :date_conducted],
             include: [
               { lab_details: { only: [:name, :value, :normal_range, :unit] } },
-              { health_facility: { only: [:name] }}
+              { health_facility: { only: [:name] }},
+              { physician: { include: [{full_name: { except: [:created_at, :updated_at, :id] }}] }}
             ]
           }
         }
