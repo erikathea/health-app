@@ -1,4 +1,5 @@
 == Health App Demo
+First attempt creating APIs via Rails. First attempt using AngularJS with Rails.
 
 ====Setup:
 
@@ -39,3 +40,4 @@ Nginx
 
 * Use ActiveModelSerializer instead of JBuilder
 * Add AngularJS related tests
+* Make Turbolink & AngularJS work with each other
