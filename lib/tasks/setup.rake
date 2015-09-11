@@ -34,7 +34,7 @@ namespace :setup do
         patient: patient,
         health_facility: health_facility,
         physician: physician,
-        name: 'Urinalysis',
+        name: 'Lab Test',
         date_conducted: Date.today
       )
 
@@ -60,8 +60,16 @@ namespace :setup do
       LabDetail.create(
         lab_record: lab_record,
         name: 'pH',
-        value: '7.0',
+        value: '9.0',
         normal_range: '4.8-7.4'
+      )
+
+      LabDetail.create(
+        lab_record: lab_record,
+        name: 'White Blood Cell Count',
+        value: '25',
+        unit: '/uL',
+        normal_range: "< 20"
       )
     end
 
