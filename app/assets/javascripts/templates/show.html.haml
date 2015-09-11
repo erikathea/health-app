@@ -32,9 +32,9 @@
           .pull-right {{ record.date_conducted | date: 'MMM dd, yyyy' }}
       .card-block
         .small.label.label-info{"style" => "padding-top: 0.6em"}
-          Show Details
+          Hide Details
           %input{"aria-label" => "Toggle ngShow", "ng-model" => "checked", :type => "checkbox"}
-        .panel.check-element.animate-hide{"ng-show" => "checked"}
+        .panel.check-element.animate-hide{"ng-hide" => "checked"}
           %table.table.table-striped
             %thead
               %tr.info
