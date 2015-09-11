@@ -7,7 +7,7 @@ class Patient < ActiveRecord::Base
   validates :full_name, presence: true
 
   def name
-    full_name
+    full_name.to_s
   end
 
   def convert_patient_records(data)
@@ -24,9 +24,17 @@ class Patient < ActiveRecord::Base
         { lab_records: {
             only: [:name, :date_conducted],
             include: [
-              { lab_details: { only: [:name, :value, :normal_range, :unit] } },
+              { lab_details: {
+                  only: [:name, :value, :normal_range, :unit],
+                  methods: :remarks
+                }
+              },
               { health_facility: { only: [:name] }},
-              { physician: { include: [{full_name: { except: [:created_at, :updated_at, :id] }}] }}
+              { physician: {
+                  except: [:created_at, :updated_at, :id, :full_name_id, :contact_detail_id],
+                  include: [{full_name: { except: [:created_at, :updated_at, :id] }}]
+                }
+              }
             ]
           }
         }

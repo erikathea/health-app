@@ -45,7 +45,14 @@
             %tbody
               %tr{"ng-repeat" => "detail in record.lab_details"}
                 %td {{ detail.name }}
-                %td {{ detail.value }}
+                %td
+                  {{ detail.value }}
+                  %span.label.label-danger{"ng-if" => "detail.remarks == 'critical' "}
+                    %span.glyphicon.glyphicon-alert
+                    {{ detail.remarks }}
+                  %span.label.label-warning{"ng-if" => "detail.remarks == 'warning' "}
+                    %span.glyphicon.glyphicon-warning-sign
+                    {{ detail.remarks }}
                 %td
                   {{ detail.unit }}
                 %td
