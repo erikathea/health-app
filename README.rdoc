@@ -1,5 +1,16 @@
 == Health App Demo
-First attempt creating APIs via Rails. First attempt using AngularJS with Rails.
+Prototype application that exposes a public API that accepts laboratory mesurements results for patient and presents the data on a web page as a timeline of events.
+
+Sample JSON https://github.com/erikathea/health-app/blob/master/lib/assets/payload.json
+
+===Patient card design:
+When viewing the patient card in a browser, the patient’s data is displayed in an FB-like news feed, grouped in boxes per the registration date. The newest registration are shown first, from top to bottom.
+
+The feed automatically refreshes with new data every 5 seconds.
+
+If a medical data comes with a normal_range value and the measured value is outside the bounded range, then put a label “warning”, if within 10% of the bounds, or “critical”, if > 10% of the bounds.
+
+For aesthetic purpose, present the data in a table per news feed entry.
 
 ====Setup:
 
@@ -15,17 +26,24 @@ First attempt creating APIs via Rails. First attempt using AngularJS with Rails.
 
 * Open app in <tt>http://127.0.0.1:3000/</tt>
 
-If errors are encountered, check if all commands in <tt>setup.sh</tt> are successful.
+If errors are encountered, check if all commands in <tt>setup.sh</tt> are successful. (https://github.com/erikathea/health-app/blob/master/setup.sh)
 
 ====Notes:
 API Calls via <tt>api.health-app.dev:3000</tt>
-* <tt>\token</tt>
-* <tt>\save</tt>
-* <tt>\patient\:ssn</tt>
+* <tt>\token</tt>  - return a limited-time auth token for saving data;
+ ** receives the following input parameters via a POST http request:
+  * application_key - 24 character string to identify the API consumer, that is looked up against a global constant, declared in the application’s environment file.
+ ** returns a 12 character randomly generated hexdigest with a 5 second expiry, that can be used by the consumer to submit data for a patient
+* <tt>\save </tt>
+  ** will receive the following input parameters via a POST http request:
+    * payload - a JSON string (see sample https://github.com/erikathea/health-app/blob/master/lib/assets/payload.json)
+    * token - 12 character string received from /token, and will be check if valid (exists and within the expiry time)
+  ** return the text ‘OK’, with http response code 200 if success, and an ‘ERROR’, with code 500 if there’s a problem
+* <tt>\patient\:ssn - accessible via a browser, will show the patient’s medical card </tt>
 
 Rake tasks
-* <tt>rake setup:bootstrap </tt>
-* <tt>rake demo:load_data </tt>
+* <tt>rake setup:bootstrap </tt> - bootstrap the app in development mode, with the built-in data for demo purposes. e.g. 10 sample patients in the database
+* <tt>rake demo:load_data </tt> - load a set of sample laboratory data, calling the API provided by the app
 
 Unicorn
 * <tt>sudo service unicorn start</tt>
@@ -41,3 +59,5 @@ Nginx
 * Use ActiveModelSerializer instead of JBuilder
 * Add AngularJS related tests
 * Make Turbolink & AngularJS work with each other
+
+
